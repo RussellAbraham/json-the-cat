@@ -9,8 +9,12 @@ const fetchBreed = (url) => {
     } else if (response.statusCode !== 200) {
       console.error(response.statusCode);
     } else {
-      const data = JSON.parse(body)
-      console.log(data);
+      const data = JSON.parse(body);
+      if (data.length === 0) {
+        console.log('Breed not found');
+      } else {
+        console.log(data[0].description);      
+      }
     }
   });
 };
