@@ -1,22 +1,27 @@
 const request = require('request');
 
-const args = process.argv.slice(2);
+/**
+ * Fetches the description of a given cat breed.
+ * @param {string} breedName - The name of the cat breed to fetch.
+ * @param {function} callback - A callback function to handle the result.
+ */
 
-const fetchBreed = (url) => {
-  request(`https://api.thecatapi.com/v1/breeds/search?q=${url}`, (error, response, body) => {
+const fetchBreed = (breedName, callback) => {
+  const apiUrl = `https://api.thecatapi.com/v1/breeds/search?q=${breedName}`;
+  request(apiUrl, (error, response, body) => {
     if (error) {
-      console.error(error);
+      callback(error);
     } else if (response.statusCode !== 200) {
-      console.error(response.statusCode);
+      callback(response.statusCode);
     } else {
       const data = JSON.parse(body);
       if (data.length === 0) {
-        console.log('Breed not found');
+        callback('Breed not found');
       } else {
-        console.log(data[0].description);      
+        callback(data[0].description);      
       }
     }
   });
 };
 
-fetchBreed(args[0]);
+module.exports = { fetchBreed };
