@@ -2,6 +2,10 @@
 
 Cats API command line application
 
+## Dependencies
+
+- request ^2.88.2
+
 ## Usage
 
 - `node breedFetcher.js sib`
