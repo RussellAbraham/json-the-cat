@@ -1,10 +1,10 @@
-const { fetchBreedDescription } = require('../breedFetcher');
+const { fetchBreed } = require('../breedFetcher');
 const { assert } = require('chai');
 
-describe('fetchBreedDescription', () => {
+describe('fetchBreed', () => {
   
   it('returns a string description for a valid breed, via callback', (done) => {
-    fetchBreedDescription('Siberian', (err, desc) => {
+    fetchBreed('sib', (err, desc) => {
       // we expect no error for this scenario
       assert.equal(err, null);
 
@@ -18,7 +18,7 @@ describe('fetchBreedDescription', () => {
   });
 
   it('returns an error for an invalid/non-existent breed, via callback', (done) => {
-    fetchBreedDescription('InvalidBreed', (err, desc) => {
+    fetchBreed('InvalidBreed', (err, desc) => {
       // we expect an error for this scenario
       assert.isNotNull(err);
 
