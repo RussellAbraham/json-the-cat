@@ -10,15 +10,17 @@ const fetchBreed = (breedName, callback) => {
   const apiUrl = `https://api.thecatapi.com/v1/breeds/search?q=${breedName}`;
   request(apiUrl, (error, response, body) => {
     if (error) {
-      callback(error);
-    } else if (response.statusCode !== 200) {
-      callback(response.statusCode);
+      callback(error, null);
     } else {
-      const data = JSON.parse(body);
-      if (data.length === 0) {
-        callback('Breed not found');
-      } else {
-        callback(data[0].description);      
+      try {
+        const data = JSON.parse(body);
+        if (data.length === 0) {
+          callback(null, null);
+        } else {
+          callback(null, data[0].description);      
+        }
+      } catch (err) {
+        callback(err, null);
       }
     }
   });

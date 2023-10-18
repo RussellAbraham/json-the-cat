@@ -12,3 +12,7 @@ Cats API command line application
 - `node index.js Chartreux`
 
 Prints out the selected breed of cat.
+
+## Testing
+
+Run tests with `npx mocha`
